@@ -1,0 +1,19 @@
+
+.table-custom-default .ant-table-thead .ant-table-cell {
+  font-size: var(--text-sm) !important;
+  color: var(--color-white) !important;
+  background-color: var(--color-amber-500) !important;
+}
+.table-custom-default .ant-table-tbody .ant-table-cell {
+  font-size: var(--text-sm) !important;
+}
+
+.table-modal-bill .ant-table-thead .ant-table-cell {
+  font-size: var(--text-sm) !important;
+  font-weight: var(--font-normal);
+  background-color: var(--color-gray-200) !important;
+}
+.table-modal-bill .ant-table-tbody .ant-table-cell {
+  font-size: var(--text-sm) !important;
+}
+

@@ -1,0 +1,12 @@
+.tagNew {
+    color: var(--color-white);
+    background-color: var(--color-amber-500);
+    font-size: var(--font-base);
+    font-weight: 500;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 18px;
+}
+.tagNew a {
+    color: var(--color-white);
+}

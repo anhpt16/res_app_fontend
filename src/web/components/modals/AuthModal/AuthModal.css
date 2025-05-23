@@ -1,0 +1,18 @@
+.auth-modal .ant-modal-content {
+    padding: 40px !important;
+}
+
+.auth-modal-input .ant-input{
+    padding: 4px 20px !important;
+    height: 40px !important;
+    border-radius: var(--radius-xl) !important;
+}
+.auth-modal-input .ant-input-affix-wrapper {
+    height: 40px !important;
+    border-radius: var(--radius-xl) !important;
+    align-items: center;
+    padding: 4px 20px;
+}
+.auth-modal-input .ant-input-affix-wrapper .ant-input{
+   padding: 0 !important;
+}

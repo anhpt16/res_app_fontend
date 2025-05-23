@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Theme */
+@theme {
+    --color-divider-gray: #ffffff1a;
+    --color-olive-light: #A6A182;
+    --color-gray-section: #1F2120;
+
+    --cursor-view-card: url("/icons/i_cursor_view.svg") 25 25, pointer;
+
+    --breakpoint-mac: 94rem;
+}
+
+/* Animate */
+@theme {
+    --animate-fade-up: fade-up 1s ease-out;
+
+    @keyframes fade-up {
+        0% {
+            opacity: 0;
+            transform: translateY(20px)
+        },
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+}
+
+/* Utilities */
+@layer utilities {
+}
+
+/* Default CSS */
+:root {
+    font-family: "Montserrat", sans-serif !important;
+    
+}
+* {
+    font-family: "Montserrat", sans-serif !important;
+}
+#root {
+    position: relative;
+    max-width: 100%;
+    width: 100%;
+}
+

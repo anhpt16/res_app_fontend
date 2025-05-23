@@ -1,0 +1,40 @@
+
+
+
+/* Background Header */
+.background-header {
+    background-image: url(/page-header-bg.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center 0;
+    height: 600px;
+    position: relative;
+}
+.background-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #0e110d;
+    opacity: 80%;
+}
+/* Custom Carousel Antd */
+.ant-carousel .slick-dots {
+    bottom: -80px !important;
+}
+.ant-carousel .slick-prev {
+  left: -25px;
+}
+.ant-carousel .slick-next {
+  right: -25px;
+}
+/* Custom Modal Antd */
+/* .ant-modal-wrap {
+  overflow: hidden !important;
+}
+.ant-modal-content {
+  max-height: 500px;
+  overflow: auto;
+} */

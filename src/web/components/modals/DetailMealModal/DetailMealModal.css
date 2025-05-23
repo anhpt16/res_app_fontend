@@ -1,0 +1,8 @@
+/* Custom Detail Modal */
+.modal-detail .ant-modal-content{
+  padding: 40px !important;
+}
+/* Custom divider */
+.modal-detail-divider .ant-divider {
+    margin: 2px 0 !important;
+}
