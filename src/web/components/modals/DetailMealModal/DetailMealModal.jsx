@@ -3,7 +3,6 @@ import {} from "react";
 import { MainCarousel } from "./MainCarousel";
 
 import { Modal, Spin, Divider } from "antd";
-import { Scrollbars } from "react-custom-scrollbars-2";
 
 import { ClockIcon, DateIcon } from "../../../../shared/utils/icons/Icons";
 import "./DetailMealModal.css";

@@ -7,7 +7,11 @@ export const WebLayout = ({children}) => {
   return (
     <>
         <Header />
-        <main>{children}</main>
+        <main className="min-h-screen flex flex-col">
+          <div className="flex-1">
+            {children}
+          </div>
+        </main>
         <Footer />
     </>
   )

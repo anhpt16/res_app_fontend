@@ -14,37 +14,125 @@
     --breakpoint-mac: 94rem;
 }
 
-/* Animate */
-@theme {
-    --animate-fade-up: fade-up 1s ease-out;
-
-    @keyframes fade-up {
-        0% {
-            opacity: 0;
-            transform: translateY(20px)
-        },
-        100% {
-            opacity: 1;
-            transform: translateY(0)
-        }
+/* ✅ Sửa: Định nghĩa keyframes ở ngoài @theme */
+@keyframes fade-up {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Utilities */
-@layer utilities {
+@keyframes fade-in-once {
+    0% {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Default CSS */
+@keyframes fade-in-scale {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes slide-in-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ✅ Sửa: Định nghĩa CSS custom properties ở :root */
 :root {
     font-family: "Montserrat", sans-serif !important;
     
+    /* ✅ Custom animation classes */
+    --animate-fade-up: fade-up 0.6s ease-out;
+    --animate-fade-in-once: fade-in-once 0.5s ease-out;
+    --animate-fade-in-scale: fade-in-scale 0.7s ease-out;
+    --animate-slide-in-left: slide-in-left 0.6s ease-out;
+    --animate-slide-in-right: slide-in-right 0.6s ease-out;
 }
+
+/* ✅ Sửa: Tạo utility classes cho animations */
+@layer utilities {
+    .animate-fade-up {
+        animation: var(--animate-fade-up);
+    }
+    
+    .animate-fade-in-once {
+        animation: var(--animate-fade-in-once);
+    }
+    
+    .animate-fade-in-scale {
+        animation: var(--animate-fade-in-scale);
+    }
+    
+    .animate-slide-in-left {
+        animation: var(--animate-slide-in-left);
+    }
+    
+    .animate-slide-in-right {
+        animation: var(--animate-slide-in-right);
+    }
+    
+    /* ✅ Animation delays */
+    .animate-delay-100 {
+        animation-delay: 100ms;
+    }
+    
+    .animate-delay-200 {
+        animation-delay: 200ms;
+    }
+    
+    .animate-delay-300 {
+        animation-delay: 300ms;
+    }
+    
+    .animate-delay-400 {
+        animation-delay: 400ms;
+    }
+    
+    .animate-delay-500 {
+        animation-delay: 500ms;
+    }
+}
+
+/* Default CSS */
 * {
     font-family: "Montserrat", sans-serif !important;
 }
+
 #root {
     position: relative;
     max-width: 100%;
     width: 100%;
 }
-

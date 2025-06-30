@@ -9,5 +9,6 @@ export { AuthModal } from "./modals/AuthModal/AuthModal";
 export { VoucherModal } from "./modals/VoucherModal/VoucherModal";
 export { DetailBillModal } from "./modals/DetailBillModal/DetailBillModal";
 export { DetailDeskModal } from "./modals/DetailDeskModal/DetailDeskModal";
+export { MediaModal } from "./modals/MediaModal/MediaModal";
 // Drawer
 export { CartDrawer } from "./drawers/CartDrawer";

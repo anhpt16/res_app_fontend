@@ -24,13 +24,13 @@ export const Header = () => {
             <span className="text-xl font-semibold text-white max-md:hidden">Bếp của tui</span>
           </Link>
           <div className="flex justify-between gap-10 max-lg:hidden">
-            <Link to="/" className="text-white text-base font-semibold">
+            <Link to="/menu" className="text-white text-base font-semibold">
               <span>Thực đơn</span>
             </Link>
-            <Link to="/" className="text-white text-base font-semibold">
+            <Link to="/new" className="text-white text-base font-semibold">
               <span>Tin tức</span>
             </Link>
-            <Link to="/" className="text-white text-base font-semibold">
+            <Link to="/collection" className="text-white text-base font-semibold">
               <span>Bộ sưu tập</span>
             </Link>
             <Link to="/" className="text-white text-base font-semibold">

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+export const Pagination = React.memo(({ currentPage, totalPages, onPageChange }) => {
     const generatePageNumbers = () => {
       const pages = [];
   
@@ -47,4 +47,4 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         </button>
       </div>
     );
-  };
+  });
