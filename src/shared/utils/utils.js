@@ -22,3 +22,8 @@ export const getFileType = (fileName) => {
   
   return 'image'; // Default fallback
 };
+
+export const formatPrice = (price) => {
+  if (!price && price !== 0) return '0';
+  return price.toLocaleString('vi-VN');
+};

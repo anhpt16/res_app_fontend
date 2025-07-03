@@ -1,14 +1,17 @@
 import { useState, useRef } from "react";
 import { Carousel } from "antd";
+import { config } from "../../../../shared/utils/env";
 
-export const MainCarousel = () => {
-    const images = [
-    '/meal_detail_default.webp',
-    '/meal_detail_default.webp',
-    '/meal_detail_default.webp',
-    '/meal_detail_default.webp',
-    '/meal_detail_default.webp',
-    ];
+export const MainCarousel = ({medias}) => {
+    let images = [];
+    console.log(medias);
+    if (!medias || medias.length <= 0) {
+        images = ["/meal_detail_default.webp"];
+    } else {
+        images = medias
+            .sort((a, b) => a.displayOrder - b.displayOrder)
+            .map((media) => `${config.API_MEDIA}${media.fileName}`);
+    }
 
     const mainRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);

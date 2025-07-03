@@ -30,7 +30,6 @@ export const AuthModal = ({ open, close }) => {
     <AnimatePresence>
       {open && (
         <>
-          {/* ✅ Backdrop được chia sẻ - không bị tạo lại khi switch */}
           <motion.div
             className="fixed inset-0 bg-black bg-opacity-40 z-40"
             style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
@@ -41,7 +40,6 @@ export const AuthModal = ({ open, close }) => {
             onClick={close}
           />
           
-          {/* ✅ Container cho modal content */}
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <AnimatePresence mode="wait">
               {authMode === "login" && (

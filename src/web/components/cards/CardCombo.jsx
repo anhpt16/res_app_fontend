@@ -7,8 +7,8 @@ import config from "../../../shared/utils/env";
 import { formatPrice } from "../../../shared/utils/utils";
 
 
-export const CardMeal = ({type, dish, onClick}) => {
-    const thumbnail = dish.thumbnail ? `${config.API_MEDIA}${dish.thumbnail}` : "/meal_default.png";
+export const CardCombo = ({combo, onClick}) => {
+    const thumbnail = combo.thumbnail ? `${config.API_MEDIA}${combo.thumbnail}` : "/meal_default.png";
 
     // startX-startY: tọa độ khi người dùng bắt đầu nhấn (chạm)
     const startX = useRef(0);
@@ -69,44 +69,19 @@ export const CardMeal = ({type, dish, onClick}) => {
             >
                 <div className="flex items-center relative">
                     <img className="w-[100px] max-md:w-[80px] aspect-square rounded-full object-cover" src={thumbnail} alt="Image Meal" />
-                    { type === MealEnum.DISCOUNT && <p className="absolute top-[-4px] max-md:top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-sm">
-                        <span>12d</span>
-                        <span>:24</span>
-                        <span className="max-md:hidden">:24</span>
-                        <span className="max-lg:hidden">:24</span>
-                    </p> }
                 </div>
                 <div className="flex flex-col justify-center gap-4 max-w-[450px] overflow-hidden">
-                    <span className="text-xl max-md:text-base text-white font-medium line-clamp-1">{dish?.name || ""}</span>
-                    <span className="text-base max-md:text-sm text-stone-400 line-clamp-1">{dish?.introduce || ""}</span>
+                    <span className="text-xl max-md:text-base text-white font-medium line-clamp-1">{combo?.name || ""}</span>
+                    <span className="text-base max-md:text-sm text-stone-400 line-clamp-1">{combo?.introduce || ""}</span>
                     <div className="flex items-center gap-2">
                         <div className="px-4 py-1 bg-olive-light rounded-2xl">
                             <span className="text-base max-md:text-sm text-white">
-                                { type === MealEnum.DISCOUNT 
-                                    ? formatPrice(dish?.priceDiscount || 0)
-                                    : formatPrice(dish?.priceDiscount ? dish?.priceDiscount : dish?.price || 0)
-                                }đ</span>
+                                {combo?.priceDiscount ? `${formatPrice(combo?.priceDiscount)}đ` : `${formatPrice(combo?.price)}đ`}
+                            </span> 
                         </div>
-                        { (type === MealEnum.DEFAULT || type === MealEnum.DISCOUNT) &&
-                            <p className="text-base max-md:text-sm text-white line-through max-lg:hidden">
-                                {dish?.priceDiscount && dish?.priceDiscount !== 0 && `${formatPrice(dish?.price)}đ`}
-                            </p>
-                        }
-                        { type === MealEnum.BEST_SELLER &&
-                            <p className="text-base max-md:text-sm text-white max-md:hidden">SL: <span>200</span></p>
-                        }
-                        { type === MealEnum.UPCOMING &&
-                            <div className="flex items-center gap-x-1 text-base max-md:text-sm text-white max-lg:hidden">
-                                <DateIcon className="h-6 text-yellow-500"/>
-                                <span>{dish?.dateStart || ""}</span>
-                            </div>
-                        }
-                        { type === MealEnum.EXPIRED_SOON &&
-                            <div className="flex items-center gap-x-1 text-base text-white max-lg:hidden">
-                                <DateIcon className="h-6 text-red-600"/>
-                                <span>{dish?.dateEnd || ""}</span>
-                            </div>
-                        }
+                        <p className="text-base max-md:text-sm text-white line-through max-lg:hidden">
+                            {combo?.priceDiscount && `${formatPrice(combo?.price)}đ`}
+                        </p>
                     </div>
                 </div>
             </div>

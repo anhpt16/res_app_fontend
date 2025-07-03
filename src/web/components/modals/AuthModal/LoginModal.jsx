@@ -2,6 +2,9 @@ import { Modal, Flex, Input, Divider } from "antd";
 import { motion } from "framer-motion";
 import { GoogleIcon, FacebookIcon } from "../../../../shared/utils/icons/Icons";
 import "./AuthModal.css";
+import { useState } from "react";
+import { useLogin } from "../../../../shared/hooks/useAuth";
+import { toast } from "react-toastify";
 
 const modalVariants = {
   initial: { 
@@ -31,8 +34,46 @@ const modalVariants = {
 
 
 export const LoginModal = ({ onClose, onSwitch }) => {
+  const loginMutation = useLogin();
+  const [formData, setFormData] = useState({
+    username: "",
+    password: ""
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+  
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.username || !formData.password) {
+      setErrorMessage("Vui lòng nhập đầy đủ thông tin");
+      return;
+    }
+    console.log(formData);
+    loginMutation.mutate(formData, {
+      onSuccess: () => {
+        onClose();
+        toast.success("Đăng nhập thành công");
+      },
+      onError: (error) => {
+        setErrorMessage(error?.response?.data?.message);
+      }
+    });
+  }
+
+
   return (
     <>
+      {loginMutation.isPending && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]">
+          <div className="bg-white rounded-lg p-6 flex flex-col items-center">
+            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="mt-3 text-gray-700">Đang đăng nhập...</p>
+          </div>
+        </div>
+      )}
       {/* Container - không có animation opacity */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         {/* Modal content - chỉ modal có scale và slide animation */}
@@ -67,16 +108,18 @@ export const LoginModal = ({ onClose, onSwitch }) => {
           
           <div className="auth-modal-input">
             <Flex vertical gap={20}>
-              <Input placeholder="Tên tài khoản" variant="filled" />
-              <Input.Password placeholder="Mật khẩu" variant="filled" />
+              <Input placeholder="Tên tài khoản" variant="filled" onChange={(e) => handleInputChange("username", e.target.value)} value={formData.username} />
+              <Input.Password placeholder="Mật khẩu" variant="filled" onChange={(e) => handleInputChange("password", e.target.value)} value={formData.password} />
             </Flex>
           </div>
           
           <p className="mt-3 text-end text-base text-amber-500 cursor-pointer hover:text-amber-600 transition-colors duration-100">
             Quên mật khẩu?
           </p>
-          
-          <button className="mt-3 bg-amber-500 hover:bg-amber-400 transition-colors duration-100 text-base text-white font-medium w-full h-10 rounded-xl cursor-pointer">
+          <p className="my-2 text-red-500 text-sm text-center">
+            {errorMessage && errorMessage}
+          </p>
+          <button onClick={handleSubmit} className="mt-3 bg-amber-500 hover:bg-amber-400 transition-colors duration-100 text-base text-white font-medium w-full h-10 rounded-xl cursor-pointer">
             Đăng nhập
           </button>
           

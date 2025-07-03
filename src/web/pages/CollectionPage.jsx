@@ -25,7 +25,7 @@ export const CollectionPage = () => {
     1100: 2,       // Tablet lớn: 2 cột  
     768: 2,        // Tablet: 2 cột
     480: 1,        // Mobile lớn: 1 cột
-    400: 1 
+    400: 1
   };
 
   // Fetch data với page=1 mặc định
@@ -259,9 +259,9 @@ export const CollectionPage = () => {
         <div className="max-w-[1300px] mx-auto max-lg:px-8">
           {allItems.length > 0 ? (
             <>
-              <Masonry 
-                breakpointCols={breakpointColumnsObj} 
-                className="flex gap-4"
+          <Masonry 
+          breakpointCols={breakpointColumnsObj} 
+          className="flex gap-4"
                 columnClassName="flex flex-col space-y-4"
               >
                 {allItems.map((item, index) => (
@@ -284,7 +284,7 @@ export const CollectionPage = () => {
           ) : (
             <div className="flex justify-center items-center h-64 animate-fade-in-once">
               <div className="text-white text-xl">Không có dữ liệu</div>
-            </div>
+              </div>
           )}
         </div>
       </section>
