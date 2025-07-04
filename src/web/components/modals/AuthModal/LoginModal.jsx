@@ -5,6 +5,7 @@ import "./AuthModal.css";
 import { useState } from "react";
 import { useLogin } from "../../../../shared/hooks/useAuth";
 import { toast } from "react-toastify";
+import { setUserInfo } from "../../../../shared/service/AuthService";
 
 const modalVariants = {
   initial: { 
@@ -53,9 +54,10 @@ export const LoginModal = ({ onClose, onSwitch }) => {
     }
     console.log(formData);
     loginMutation.mutate(formData, {
-      onSuccess: () => {
+      onSuccess: (response) => {
         onClose();
         toast.success("Đăng nhập thành công");
+        setUserInfo(response?.data);
       },
       onError: (error) => {
         setErrorMessage(error?.response?.data?.message);

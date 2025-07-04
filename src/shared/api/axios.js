@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../utils/env";
+import { clearUserInfo } from "../service/AuthService";
 
 // Tạo Axios Instance
 const axiosInstance = axios.create({
@@ -21,6 +22,7 @@ axiosInstance.interceptors.response.use(
       if (status === 401) {
         console.warn('401 Unauthorized - người dùng chưa đăng nhập hoặc token hết hạn.')
         // Ví dụ: logout, redirect, hoặc thông báo
+        clearUserInfo();
       }
 
       if (status >= 500) {

@@ -3,18 +3,85 @@ import { Link, useLocation } from "react-router-dom";
 
 import { Divider } from "antd";
 import { AuthModal } from "../../web/components";
-
+import { useSelector } from "react-redux";
+import { clearUserInfo } from "../../shared/service/AuthService";
 import logo from "/logo_res.svg";
+import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Space, Tooltip } from 'antd';
+import { useLogout } from "../../shared/hooks/useAuth";
 
+const itemsUser = [
+  {
+    key: '1',
+    label: (
+      <Link to="/menu">
+        Thông tin cá nhân
+      </Link>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <Link to="/menu">
+        Đặt bàn
+      </Link>
+    ),
+  },
+  {
+    key: '3',
+    label: (
+      <Link to="/menu">
+        Hóa đơn
+      </Link>
+    ),
+  },
+  {
+    key: 'logout',
+    label: 'Đăng xuất',
+  },
+]
 
-
+const itemsAdmin = [
+  {
+    key: '1',
+    label: (
+      <Link to="/menu">
+        Trang quản trị
+      </Link>
+    ),
+  }
+]
 export const Header = () => {
   const location = useLocation();
+  const { id, name, roles } = useSelector((state) => state.auth);
+  let items = [];
+  if (roles?.length > 0) {
+    roles.forEach(role => {
+      if (role.name === "user") {
+        items = itemsUser;
+      } else if (role.name === "admin") {
+        items = itemsAdmin;
+      }
+    });
+  }
+  const logoutMutation = useLogout();
   const path = location.pathname;
   const isAdminOrUser = path.startsWith("/admin") || path.startsWith("/user");
 
   const [open, setOpen] = useState(false);
 
+  const handleMenuClick = ({ key }) => {
+    if (key === 'logout') {
+      logoutMutation.mutate(null, {
+        onSuccess: () => {
+          clearUserInfo();
+        },
+        onError: () => {
+          console.log("logout error");
+        }
+      });
+    }
+  };
   return (
     <header className={`w-full h-[112px] flex justify-center items-center z-50 ${isAdminOrUser ? "bg-stone-900" : "absolute bg-transparent border-b-1 border-divider-gray"}`}>
         <div className="w-[1300px] flex justify-between items-center max-lg:px-8">
@@ -44,9 +111,24 @@ export const Header = () => {
               <span>Đặt bàn</span>
             </Link>
           </div>
-          <div className="text-white text-base font-semibold cursor-pointer" onClick={() => setOpen(true)}>
-            <span>Đăng nhập</span>
-          </div>
+          {id && name && roles?.length > 0 ? (
+            <Dropdown menu={{
+              items,
+              onClick: handleMenuClick,
+            }}>
+              {/* Đừng dùng <a> nếu không cần mở liên kết */}
+              <span style={{ cursor: 'pointer' }}>
+                <Space>
+                  <UserOutlined style={{color: "white"}} />
+                  <span className="text-white">{name}</span>
+                </Space>
+              </span>
+            </Dropdown>
+          ) : (
+            <div className="text-white text-base font-semibold cursor-pointer" onClick={() => setOpen(true)}>
+              <span>Đăng nhập</span>
+            </div>
+          )}
         </div>
         <AuthModal open={open} close={() => setOpen(false)}/>
       </header>
